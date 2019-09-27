@@ -1,0 +1,41 @@
+[
+  {
+    "_id": "5bee92253e1b1123ac49a43f",
+    "name": "Education"
+  },
+
+  {
+    "_id": "5bee92573e1b1123ac49a440",
+    "name": "Fintech"
+  },
+
+  {
+    "_id": "5bee926e3e1b1123ac49a441",
+    "name": "Economics"
+  },
+  {
+    "_id": "5bee929d3e1b1123ac49a442",
+    "name": "Agriculture"
+  },
+
+  {
+    "_id": "5bee92b13e1b1123ac49a443",
+    "name": "Ecommerce"
+  },
+  {
+    "_id": "5bee92cd3e1b1123ac49a444",
+    "name": "Logistics"
+  },
+  {
+    "_id": "5bee92b13e1b1123ac49a445",
+    "name": "Security"
+  },
+  {
+    "_id": "5bee92b13e1b1123ac49a446",
+    "name": "Technology"
+  },
+  {
+    "_id": "5bee92b13e1b1123ac49a447",
+    "name": "Real Estate"
+  }
+]
