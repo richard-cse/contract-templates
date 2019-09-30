@@ -1,11 +1,10 @@
 import Contract from 'Contract'
 import Payment from 'Payment'
 class TokenMain extends Contract {
-  static viewFuncs = ['getAddresses', 'getTokenName']
+  static viewFuncs = [ 'getTokenName']
   static authenticationFuncs = ['Transaction']
   static publicFuncs = [
     'getTokenName',
-    'getAddresses',
     'createAccount',
     'Transaction',
   ]
@@ -18,7 +17,6 @@ class TokenMain extends Contract {
       type: String,
       required: true
     },
-
     transaction: [{
       amount: {
         type: Number,
@@ -38,9 +36,6 @@ class TokenMain extends Contract {
     super(data)
     this._payment = new Payment(data)
   }
-  getAddresses() {
-    return this.accounts;
-  }
   getTokenName() {
     return this.tokenName;
   }
@@ -59,9 +54,6 @@ class TokenMain extends Contract {
     }
     this.transaction.push(rs)
     return { CustomerAddress, amount }
-  }
-  getTransactionByAddress(address) {
-    return this.accounts.find(account => (account.address = address));
   }
 }
 export default TokenMain
