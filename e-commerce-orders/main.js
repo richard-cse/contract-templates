@@ -1,12 +1,10 @@
 import Contract from 'Contract'
 import Payment from 'Payment'
 class TokenMain extends Contract {
-  static viewFuncs = ['getAddresses', 'getTokenName', 'getAccountByAddress']
+  static viewFuncs = ['getAddresses', 'getTokenName']
   static authenticationFuncs = ['Transaction']
-  static owner = ['setPrice']
   static publicFuncs = [
     'getTokenName',
-    'getAccountByAddress',
     'getAddresses',
     'createAccount',
     'Transaction',
@@ -20,13 +18,18 @@ class TokenMain extends Contract {
       type: String,
       required: true
     },
-    accounts: [{
-      balance: {
+
+    transaction: [{
+      amount: {
         type: Number,
         default: 0
       },
-      address: {
+      CustomerAddress: {
         type: String,
+        required: true
+      },
+      timestamp: {
+        type: Number,
         required: true
       }
     }]
@@ -41,34 +44,24 @@ class TokenMain extends Contract {
   getTokenName() {
     return this.tokenName;
   }
-  async Transaction(Opico, amount) {
-    if (!amount) throw 'not have amount'
-    const CustomerAddress = this.sender // from headers // privatekey => public key
-    const walletCustomer = this.getAccountByAddress(CustomerAddress)
-    if (!walletCustomer) throw 'FROM_ADDRESS_INVALID'
-    if (walletCustomer.balance < amount) throw 'No enough money'
-    const walletOpico = this.getAccountByAddress(Opico)
-    if (!walletOpico) throw 'TO_ADDRESS_INVALID'
-    this.setToAddress(walletOpico.address)
-    // subtract from wallet
-    walletCustomer.balance -= amount
-    // add to wallet
-    walletOpico.balance += amount
-    return CustomerAddress
-  }
-  getAccountByAddress(address) {
-    return this.accounts.find(account => account.address === address)
-  }
   async createAccount() {
-    // create address
-    const address = await this.generateAddress()
-    // save to db
+    const address = await this.generateAddress();
+    this.transaction;
+    return address;
+  }
+  async Transaction(amount) {
+    if (!amount) throw 'not have amount'
+    const CustomerAddress = this.sender
     const rs = {
-      address: address.address,
-      balance: 0
+      amount: 0,
+      CustomerAddress: CustomerAddress,
+      timestamp: this.timestamp()
     }
-    this.accounts.push(rs)
-    return address
+    this.transaction.push(rs)
+    return { CustomerAddress, amount }
+  }
+  getTransactionByAddress(address) {
+    return this.accounts.find(account => (account.address = address));
   }
 }
 export default TokenMain
