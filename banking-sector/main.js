@@ -100,7 +100,7 @@ class TokenMain extends Contract {
   }
   // --------------------RBI---------------------------
   async RBI() {
-    await this.checkProcess2(this.sender, 'USER')
+    await this._user.checkUser(this.sender, 'USER')
     let RBI = await this._process.createProcess('RBI')
     return RBI
   }

@@ -45,7 +45,6 @@ class TokenMain extends Contract {
     'Transfer_Token',
     'get_Transfer_Token',
     'OwnershipTranfer',
-
   ]
   static schemas = {
     name: {
@@ -70,7 +69,6 @@ class TokenMain extends Contract {
     this._user = new User(data)
     this._stage = new Stage(data)
   }
-
   //---------------------USER------------------------------
   async Oracle_SCM_cloud() {
     let Oracle_SCM_cloud = await this._user.createUser('ORACLE_SCM_CLOUD')
@@ -88,7 +86,6 @@ class TokenMain extends Contract {
     let Oracle_PaaS_Application = this._user.getUserByType('ORACLE_PAAS_APPLICATION')
     return Oracle_PaaS_Application
   }
-
   async Oracle_Blockchain_Cloud_Service() {
     let Oracle_Blockchain_Cloud_Service = await this._user.createUser('ORACLE_BLOCKCHAIN_CLOUD_SERVICE')
     return Oracle_Blockchain_Cloud_Service
@@ -97,7 +94,6 @@ class TokenMain extends Contract {
     let Oracle_Blockchain_Cloud_Service = this._user.getUserByType('ORACLE_BLOCKCHAIN_CLOUD_SERVICE')
     return Oracle_Blockchain_Cloud_Service
   }
-
   // --------------------Create_PO---------------------------
   async Create_PO() {
     await this._user.checkUser(this.sender, 'ORACLE_SCM_CLOUD')
@@ -107,8 +103,6 @@ class TokenMain extends Contract {
   get_Create_PO() {
     return this._stage.getStageByType('CREATE_PO')
   }
-
-
 // --------------------Manufacturer_Goods---------------------------  
   async Manufacturer_Goods(address_Create_PO) {
     this._user.checkUser(this.sender, 'ORACLE_PAAS_APPLICATION')
@@ -117,12 +111,10 @@ class TokenMain extends Contract {
       throw 'CREATE_PO IS NOT EXIST'
     let Manufacturer_Goods = await this._stage.createStage('MANUFACTURER_GOODS')
     return Manufacturer_Goods
-
   }
   get_Manufacturer_Goods() {
     return this._stage.getStageByType('MANUFACTURER_GOODS')
   }
-
   // --------------------Create_Product_Asset---------------------------
   async Create_Product_Asset(address_Manufacturer_Goods) {
     this._user.checkUser(this.sender, 'ORACLE_BLOCKCHAIN_CLOUD_SERVICE')
@@ -131,14 +123,10 @@ class TokenMain extends Contract {
       throw 'MANUFACTURER_GOODS IS NOT EXIST'
     let Create_WO = await this._stage.createStage('CREATE_PRODUCT_ASSET')
     return Create_WO
-
   }
-
   get_Create_Product_Asset() {
     return this._stage.getStageByType('CREATE_PRODUCT_ASSET')
   }
-
-
   // --------------------Generate_Unique_Blockchain_Tag---------------------------
   async Generate_Unique_Blockchain_Tag(address_Create_Product_Asset) {
     this._user.checkUser(this.sender, 'ORACLE_BLOCKCHAIN_CLOUD_SERVICE')
@@ -148,12 +136,10 @@ class TokenMain extends Contract {
     let Generate_Unique_Blockchain_Tag = await this._stage.createStage('GENERATE_UNIQUE_BLOCKCHAIN_TAG')
     this.setToAddress(Generate_Unique_Blockchain_Tag.address)
     return 'SUCCESS'
-
   }
   get_Generate_Unique_Blockchain_Tag  () {
     return this._stage.getStageByType('GENERATE_UNIQUE_BLOCKCHAIN_TAG')
   }
-
   // --------------------Ship_Goods---------------------------
   async Ship_Goods(address_Manufacturer_Goods) {
     this._user.checkUser(this.sender, 'ORACLE_PAAS_APPLICATION')
@@ -162,13 +148,10 @@ class TokenMain extends Contract {
       throw 'MANUFACTURER_GOODS IS NOT EXIST'
     let Ship_Goods = await this._stage.createStage('SHIP_GOODS')
     return Ship_Goods
-
   }
-
   get_Ship_Goods() {
     return this._stage.getStageByType('SHIP_GOODS')
   }
-
   // --------------------Receive_PO---------------------------
   async Receive_PO(address_Ship_Goods) {
     this._user.checkUser(this.sender, 'ORACLE_SCM_CLOUD')
@@ -177,18 +160,14 @@ class TokenMain extends Contract {
       throw 'SHIP_GOODS IS NOT EXIST'
     let Receive_PO = await this._stage.createStage('RECEIVE_PO')
     return Receive_PO
-
   }
-
   get_Receive_PO() {
     return this._stage.getStageByType('RECEIVE_PO')
   }
   // --------------------Transfer_Token---------------------------\\
-
-
-  async Transfer_Token(address_Transfer_Token) {
+  async Transfer_Token(address_Receive_PO) {
     this._user.checkUser(this.sender, 'ORACLE_BLOCKCHAIN_CLOUD_SERVICE')
-    let check_Receive_PO= this._stage.getStageByAddress(address_Transfer_Token)
+    let check_Receive_PO= this._stage.getStageByAddress(address_Receive_PO)
     if (!check_Receive_PO || check_Receive_PO.type !== 'RECEIVE_PO')
       throw 'RECEIVE_PO IS NOT EXIST'
     let Transfer_Token = await this._stage.createStage('TRANSFER_TOKEN')
@@ -197,8 +176,6 @@ class TokenMain extends Contract {
   get_Transfer_Token() {
     return this._stage.getStageByType('TRANSFER_TOKEN')
   }
-
- 
   // --------------------OwnershipTranfer---------------------------
   async OwnershipTranfer(address_Transfer_Token) {
     this._user.checkUser(this.sender, 'ORACLE_BLOCKCHAIN_CLOUD_SERVICE')
@@ -208,14 +185,6 @@ class TokenMain extends Contract {
     let OwnershipTranfer = await this._stage.createStage('OWNERSHIP_TRANFER')
     this.setToAddress(OwnershipTranfer.address)
     return 'SUCCESS'
-
   }
-
- 
- 
-
-
-
-
 }
 export default TokenMain;

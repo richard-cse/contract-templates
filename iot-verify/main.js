@@ -138,7 +138,7 @@ class TokenMain extends Contract {
     return user
   }
   get_USer() {
-    let Iot_Device = this._user.getUserByType('IOT_DEVICE')
+    let Iot_Device = this._user.getUserByType('USER')
     return Iot_Device
   }
   //----Initialize_Magnetic_Contact_Bluetooth_Device_GSM_Module_LCD_Diplay_Keypad_Servo_Motor_and_Buzzer------------------------------
@@ -199,7 +199,7 @@ class TokenMain extends Contract {
   // --------------------DisConnect---------------------------
   check_DisConnect(address) {
     let check_DisConnect = this.get_DisConnectByAddress(address)
-    if (!check_DisConnect || check_DisConnect.type !== 'DISCONNECTED') throw `DISCONNECTED IS NOT EXIST`
+    if (!check_DisConnect || check_DisConnect.type !== 'DISCONNECT') throw `DISCONNECT IS NOT EXIST`
     return true
   }
   get_DisConnectByAddress(address) {
@@ -210,11 +210,11 @@ class TokenMain extends Contract {
     let check_Sense_Magnetic_Contact_position = this._act.getActByAddress(address_Sense_Magnetic_Contact_position)
     if (!check_Sense_Magnetic_Contact_position || check_Sense_Magnetic_Contact_position.type !== 'SENSE_MAGNETIC_CONTACT_POSITION')
       throw 'SENSE_MAGNETIC_CONTACT_POSITION IS NOT EXIST'
-    let DisConnect = await this._act.createAct('DISCONNECTED')
+    let DisConnect = await this._act.createAct('DISCONNECT')
     return DisConnect
   }
-  get_DisConnected() {
-    return this._act.getActByType('DISCONNECTED')
+  get_DisConnect() {
+    return this._act.getActByType('DISCONNECT')
   }
   // --------------------Connected---------------------------
   async  Connected(address_Sense_Magnetic_Contact_position) {
@@ -364,11 +364,11 @@ class TokenMain extends Contract {
   }
   async  check_Display_Wrong_Password() {
     this.checkAct2(this.sender, 'NOT_VERIFY_01_OR_NOT_VERIFY_02_FOR_CHECK')
-    let check = await this._act.createAct('NOT_VERIFY_01_OR_NOT_VERIFY_02')
+    let check = await this._act.createAct('CHECK_DISPLAY_WRONG_PASSWORD')
     return check
   }
   get_check_Display_Wrong_Password() {
-    return this._act.getActByType('NOT_VERIFY_01_OR_NOT_VERIFY_02')
+    return this._act.getActByType('CHECK_DISPLAY_WRONG_PASSWORD')
   }
   checkDisplay_Wrong_Password(address) {
     let checkDisplay_Wrong_Password = this.getDisplay_Wrong_PasswordByAddress(address)
@@ -381,8 +381,8 @@ class TokenMain extends Contract {
   async  Display_Wrong_Password(address_check_Display_Wrong_Password) {
     this._user.checkUser(this.sender, 'USER')
     let check_Display_Wrong_Password = this._act.getActByAddress(address_check_Display_Wrong_Password)
-    if (!check_Display_Wrong_Password || check_Display_Wrong_Password.type !== 'NOT_VERIFY_01_OR_NOT_VERIFY_02')
-      throw 'NOT_VERIFY_01_OR_NOT_VERIFY_02 IS NOT EXIST'
+    if (!check_Display_Wrong_Password || check_Display_Wrong_Password.type !== 'CHECK_DISPLAY_WRONG_PASSWORD')
+      throw 'CHECK_DISPLAY_WRONG_PASSWORD IS NOT EXIST'
     let Display_Wrong_Password = await this._act.createAct('DISPLAY_WRONG_PASSWORD')
     return Display_Wrong_Password
   }
@@ -416,18 +416,18 @@ class TokenMain extends Contract {
     let check_check_Turn_on_LED = this._act.getActByAddress(address_check_Turn_on_LED)
     if (!check_check_Turn_on_LED || check_check_Turn_on_LED.type !== 'DISCONNECTED_OR_DISPLAY_WRONG_PASSWORD')
       throw 'DISCONNECTED_OR_DISPLAY_WRONG_PASSWORD IS NOT EXIST'
-    let Turn_on_LED = await this._act.createAct('TURN_ON_LEB')
+    let Turn_on_LED = await this._act.createAct('TURN_ON_LED')
     return Turn_on_LED
   }
   get_Turn_on_LED() {
-    return this._act.getActByType('TURN_ON_LEB')
+    return this._act.getActByType('TURN_ON_LED')
   }
   // --------------------Turn_on_Buzzer---------------------------
   async  Turn_on_Buzzer(address_Turn_on_LED) {
     this._user.checkUser(this.sender, 'USER')
     let check_Turn_on_LED = this._act.getActByAddress(address_Turn_on_LED)
-    if (!check_Turn_on_LED || check_Turn_on_LED.type !== 'TURN_ON_LEB')
-      throw 'TURN_ON_LEB IS NOT EXIST'
+    if (!check_Turn_on_LED || check_Turn_on_LED.type !== 'TURN_ON_LED')
+      throw 'TURN_ON_LED IS NOT EXIST'
     let Turn_on_Buzzer = await this._act.createAct('TURN_ON_BUZZER')
     return Turn_on_Buzzer
   }
@@ -436,8 +436,8 @@ class TokenMain extends Contract {
   }
   // --------------------Sent_SMS_to_Owner_s_Mobile_Phone---------------------------
   check_Sent_SMS_to_Owner_s_Mobile_Phone(address) {
-    let check_Not_verify_02 = this.get_Sent_SMS_to_Owner_s_Mobile_PhoneByAddress(address)
-    if (!check_Not_verify_02 || check_Not_verify_02.type !== 'NOT_VERIFY_02') throw `NOT_VERIFY_02 IS NOT EXIST`
+    let check_Sent_SMS_to_Owner_s_Mobile_Phone= this.get_Sent_SMS_to_Owner_s_Mobile_PhoneByAddress(address)
+    if (!check_Sent_SMS_to_Owner_s_Mobile_Phone || check_Sent_SMS_to_Owner_s_Mobile_Phone.type !== 'SENT_SMS_TO_OWNER_S_MOBILE_PHONE') throw `SENT_SMS_TO_OWNER_S_MOBILE_PHONE IS NOT EXIST`
     return true
   }
   get_Sent_SMS_to_Owner_s_Mobile_PhoneByAddress(address) {
@@ -476,9 +476,9 @@ class TokenMain extends Contract {
   get_Check_Logic_Condition_of_Enable_Pin_forc_check() {
     return this._act.getActByType('SENT_SMS_TO_OWNER_S_MOBILE_PHONE_OR_LOW')
   }
-  async  Check_Logic_Condition_of_Enable_Pin(address_check_Turn_on_LED) {
+  async  Check_Logic_Condition_of_Enable_Pin(address_Check_Logic_Condition_of_Enable_Pin_forc_check) {
     this._user.checkUser(this.sender, 'USER')
-    let check_Check_Logic_Condition_of_Enable_Pin_forc_check = this._act.getActByAddress(address_check_Turn_on_LED)
+    let check_Check_Logic_Condition_of_Enable_Pin_forc_check = this._act.getActByAddress(address_Check_Logic_Condition_of_Enable_Pin_forc_check)
     if (!check_Check_Logic_Condition_of_Enable_Pin_forc_check || check_Check_Logic_Condition_of_Enable_Pin_forc_check.type !== 'SENT_SMS_TO_OWNER_S_MOBILE_PHONE_OR_LOW')
       throw 'SENT_SMS_TO_OWNER_S_MOBILE_PHONE_OR_LOW IS NOT EXIST'
     let Check_Logic_Condition_of_Enable_Pin = await this._act.createAct('CHECK_LOGIC_CONDITION_OF_ENABLE_PIN')

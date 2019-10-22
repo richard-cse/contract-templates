@@ -201,7 +201,6 @@ class TokenMain extends Contract {
   checkProcess1(address) {
     this._user.checkUser = this._user.getUserByAddress(address);
     this.check_Reinvest = this.get_ReinvestByAddress(address);
-
     if (this._user.checkUser.type == 'USER') {
       return true;
     }
@@ -378,13 +377,13 @@ class TokenMain extends Contract {
     return check2
   }
   get_Check_Type_of_Crowdfunding_and_Funding_Models() {
-    return this._process.getProcessByType('CHECK_INVESTMENT_TYPE')
+    return this._process.getProcessByType('CHECK_TYPE_OF_CROWDFUNDING_AND_FUNDING_MODELS')
   }
   async Type_of_Crowdfunding_and_Funding_Models(address_Check_Investment_Type) {
     this._user.checkUser(this.sender, 'USER')
     let check_Check_Investment_Type = this._process.getProcessByAddress(address_Check_Investment_Type)
-    if (!check_Check_Investment_Type || check_Check_Investment_Type.type !== 'CHECK_INVESTMENT_TYPE')
-      throw 'CHECK_INVESTMENT_TYPE IS NOT EXIST'
+    if (!check_Check_Investment_Type || check_Check_Investment_Type.type !== 'CHECK_TYPE_OF_CROWDFUNDING_AND_FUNDING_MODELS')
+      throw 'CHECK_TYPE_OF_CROWDFUNDING_AND_FUNDING_MODELS IS NOT EXIST'
     let process = await this._process.createProcess('TYPE_OF_CROWDFUNDING_AND_FUNDING_MODELS')
     return process
   }
@@ -701,7 +700,6 @@ class TokenMain extends Contract {
   get_Patronage_Plus() {
     return this._process.getProcessByType('PATRONAGE_PLUS')
   }
-
   // --------------------Transfer--------------------------- 
   checkProcess4(address) {
     this.check_Equity = this.get_EquityByAddress(address);
@@ -732,11 +730,11 @@ class TokenMain extends Contract {
   get_Check_Transfer() {
     return this._process.getProcessByType('CHECK_TRANSFER')
   }
-  async Transfer(address_Check_Reinvest) {
+  async Transfer(address_Check_Transfer) {
     this._user.checkUser(this.sender, 'USER')
-    let check_Check_Reinvest = this._process.getProcessByAddress(address_Check_Reinvest)
-    if (!check_Check_Reinvest || check_Check_Reinvest.type !== 'CHECK_REINVEST')
-      throw 'CHECK_REINVEST IS NOT EXIST'
+    let check_Check_Transfer = this._process.getProcessByAddress(address_Check_Transfer)
+    if (!check_Check_Transfer || check_Check_Transfer.type !== 'CHECK_TRANSFER')
+      throw 'CHECK_TRANSFER IS NOT EXIST'
     let Transfer = await this._process.createProcess('TRANSFER')
     return Transfer
   }
@@ -771,18 +769,18 @@ class TokenMain extends Contract {
     let check_Securities_Determination = this._process.getProcessByAddress(address_Securities_Determination)
     if (!check_Securities_Determination || check_Securities_Determination.type !== 'SECURITIES_DETERMINATION')
       throw 'SECURITIES_DETERMINATION IS NOT EXIST'
-    let Securities_Exemptions = await this._process.createProcess('SECURITIES_EXMPTIONS')
+    let Securities_Exemptions = await this._process.createProcess('SECURITIES_EXEMPTIONS')
     return Securities_Exemptions
   }
   get_Securities_Exemptions() {
-    return this._process.getProcessByType('SECURITIES_EXMPTIONS')
+    return this._process.getProcessByType('SECURITIES_EXEMPTIONS')
   }
   //----------Successful_Investment---------------------------
   async Successful_Investment(address_Securities_Exemptions) {
     this._user.checkUser(this.sender, 'USER')
     let check_Securities_Exemptions = this._process.getProcessByAddress(address_Securities_Exemptions)
-    if (!check_Securities_Exemptions || check_Securities_Exemptions.type !== 'SECURITIES_EXMPTIONS')
-      throw 'SECURITIES_EXMPTIONS IS NOT EXIST'
+    if (!check_Securities_Exemptions || check_Securities_Exemptions.type !== 'SECURITIES_EXEMPTIONS')
+      throw 'SECURITIES_EXEMPTIONS IS NOT EXIST'
     let Successful_Investment = await this._process.createProcess('SUCCESSFUL_INVESTMENT')
     return Successful_Investment
   }
@@ -793,8 +791,8 @@ class TokenMain extends Contract {
   async Fail_Investment(address_Securities_Exemptions) {
     this._user.checkUser(this.sender, 'USER')
     let check_Securities_Exemptions = this._process.getProcessByAddress(address_Securities_Exemptions)
-    if (!check_Securities_Exemptions || check_Securities_Exemptions.type !== 'SECURITIES_EXMPTIONS')
-      throw 'SECURITIES_EXMPTIONS IS NOT EXIST'
+    if (!check_Securities_Exemptions || check_Securities_Exemptions.type !== 'SECURITIES_EXEMPTIONS')
+      throw 'SECURITIES_EXEMPTIONS IS NOT EXIST'
     let Fail_Investment = await this._process.createProcess('FAIL_INVESTMENT')
     this.setToAddress(Fail_Investment.address)
     return 'END'

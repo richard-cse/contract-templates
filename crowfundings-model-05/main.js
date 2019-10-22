@@ -89,18 +89,18 @@ class TokenMain extends Contract {
     let check_Securities_Determination = this._process.getProcessByAddress(address_Securities_Determination)
     if (!check_Securities_Determination || check_Securities_Determination.type !== 'SECURITIES_DETERMINATION')
       throw 'SECURITIES_DETERMINATION IS NOT EXIST'
-    let Securities_Exemptions = await this._process.createProcess('SECURITIES_EXMPTIONS')
+    let Securities_Exemptions = await this._process.createProcess('SECURITIES_EXEMPTIONS')
     return Securities_Exemptions
   }
   get_Securities_Exemptions() {
-    return this._process.getProcessByType('SECURITIES_EXMPTIONS')
+    return this._process.getProcessByType('SECURITIES_EXEMPTIONS')
   }
   //----------Successful_Investment---------------------------
   async Successful_Investment(address_Securities_Exemptions) {
     this._user.checkUser(this.sender, 'USER')
     let check_Securities_Exemptions = this._process.getProcessByAddress(address_Securities_Exemptions)
-    if (!check_Securities_Exemptions || check_Securities_Exemptions.type !== 'SECURITIES_EXMPTIONS')
-      throw 'SECURITIES_EXMPTIONS IS NOT EXIST'
+    if (!check_Securities_Exemptions || check_Securities_Exemptions.type !== 'SECURITIES_EXEMPTIONS')
+      throw 'SECURITIES_EXEMPTIONS IS NOT EXIST'
     let Successful_Investment = await this._process.createProcess('SUCCESSFUL_INVESTMENT')
     return Successful_Investment
   }
@@ -111,8 +111,8 @@ class TokenMain extends Contract {
   async Fail_Investment(address_Securities_Exemptions) {
     this._user.checkUser(this.sender, 'USER')
     let check_Securities_Exemptions = this._process.getProcessByAddress(address_Securities_Exemptions)
-    if (!check_Securities_Exemptions || check_Securities_Exemptions.type !== 'SECURITIES_EXMPTIONS')
-      throw 'SECURITIES_EXMPTIONS IS NOT EXIST'
+    if (!check_Securities_Exemptions || check_Securities_Exemptions.type !== 'SECURITIES_EXEMPTIONS')
+      throw 'SECURITIES_EXEMPTIONS IS NOT EXIST'
     let Fail_Investment = await this._process.createProcess('FAIL_INVESTMENT')
     this.setToAddress(Fail_Investment.address)
     return 'END'

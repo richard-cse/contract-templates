@@ -200,7 +200,6 @@ class TokenMain extends Contract {
   get_Sensor_dataByAddress(address) {
     return this.accounts.find(account => account.address === address)
   }
-
   async  Sensor_data() {
     this.checkUser1(this.sender, 'WEB_SERVER_OR_IOT_DEVICE')
     let Sensor_data = await this._act.createAct('SENSOR_DATA')
@@ -423,8 +422,8 @@ class TokenMain extends Contract {
   // --------------------Connected--------------------------- 
   async Connected(address_Connect) {
     this._user.checkUser(this.sender, 'IOT_GATEWAY')
-    let check_Initiates_SSL_connections_w_or_server = this._act.getActByAddress(address_Connect)
-    if (!check_Initiates_SSL_connections_w_or_server || check_Initiates_SSL_connections_w_or_server.type !== 'CONNECT')
+    let check_Connect = this._act.getActByAddress(address_Connect)
+    if (!check_Connect || check_Connect.type !== 'CONNECT')
       throw 'CONNECT IS NOT EXIST'
     let Connected = await this._act.createAct('CONNECTED')
     return Connected
@@ -435,8 +434,8 @@ class TokenMain extends Contract {
   // --------------------Disconnect--------------------------- 
   async Disconnect(address_Connect) {
     this._user.checkUser(this.sender, 'IOT_GATEWAY')
-    let check_Initiates_SSL_connections_w_or_server = this._act.getActByAddress(address_Connect)
-    if (!check_Initiates_SSL_connections_w_or_server || check_Initiates_SSL_connections_w_or_server.type !== 'CONNECT')
+    let check_Connect = this._act.getActByAddress(address_Connect)
+    if (!check_Connect || check_Connect.type !== 'CONNECT')
       throw 'CONNECT IS NOT EXIST'
     let Disconnect = await this._act.createAct('DISCONNECT')
     return Disconnect
@@ -465,22 +464,22 @@ class TokenMain extends Contract {
     return this._act.getActByType('ERROR_REPORT')
   }
   // --------------------Transmit_Data_to_Server_HTTPS--------------------------- 
-  async Transmit_Data_to_Serve_HTTPS(address_Disconnect) {
+  async Transmit_Data_to_Server_HTTPS(address_Disconnect) {
     this._user.checkUser(this.sender, 'IOT_GATEWAY')
-    let check_Connected = this._act.getActByAddress(address_Disconnect)
-    if (!check_Connected || check_Connected.type !== 'CONNECTED')
+    let check_Disconnect= this._act.getActByAddress(address_Disconnect)
+    if (!check_Disconnect || check_Disconnect.type !== 'DISCONNECT')
       throw 'DISCONNECT IS NOT EXIST'
-    let Transmit_Data_to_Serve_HTTPS = await this._act.createAct('TRANSMIT_DATA_TO_SERVER_HTTPS')
-    return Transmit_Data_to_Serve_HTTPS
+    let Transmit_Data_to_Server_HTTPS = await this._act.createAct('TRANSMIT_DATA_TO_SERVER_HTTPS')
+    return Transmit_Data_to_Server_HTTPS
   }
   get_Transmit_Data_to_Serve_HTTPS() {
     return this._act.getActByType('TRANSMIT_DATA_TO_SERVER_HTTPS')
   }
   // --------------------HTTPS_POST--------------------------- 
-  async HTTPS_POST(address_Transmit_Data_to_Serve_HTTPS) {
+  async HTTPS_POST(address_Transmit_Data_to_Server_HTTPS) {
     this._user.checkUser(this.sender, 'WEB_SERVER')
-    let check_Transmit_Data_to_Serve_HTTPS = this._act.getActByAddress(address_Transmit_Data_to_Serve_HTTPS)
-    if (!check_Transmit_Data_to_Serve_HTTPS || check_Transmit_Data_to_Serve_HTTPS.type !== 'TRANSMIT_DATA_TO_SERVER_HTTPS')
+    let check_Transmit_Data_to_Server_HTTPS = this._act.getActByAddress(address_Transmit_Data_to_Server_HTTPS)
+    if (!check_Transmit_Data_to_Server_HTTPS || check_Transmit_Data_to_Server_HTTPS.type !== 'TRANSMIT_DATA_TO_SERVER_HTTPS')
       throw 'TRANSMIT_DATA_TO_SERVER_HTTPS IS NOT EXIST'
     let HTTPS_POST = await this._act.createAct('HTTPS_POST')
     return HTTPS_POST
@@ -517,7 +516,7 @@ class TokenMain extends Contract {
   get_Encrypted_DataByAddress(address) {
     return this.accounts.find(account => account.address === address)
   }
-  async Encrypted_Data(address_Transmit_Data_to_Serve_HTTPS) {
+  async Encrypted_Data() {
     this._user.checkUser(this.sender, 'WEB_SERVER')
     let Encrypted_Data = await this._act.createAct('ENCRYPTED_DATA')
     return Encrypted_Data
@@ -539,12 +538,12 @@ class TokenMain extends Contract {
       throw `ENCRYPTED_DATA_OR_HTTPS_POST_RECEIVED_FOR_CHECK NOT EXIST`;
     }
   }
-  async  Decrypt_Data_or_HTTPS_POST_received() {
+  async  Encrypted_Data_or_HTTPS_POST_received() {
     this.checkAct3(this.sender, 'ENCRYPTED_DATA_OR_HTTPS_POST_RECEIVED_FOR_CHECK')
     let ACT3 = await this._act.createAct('ENCRYPTED_DATA_OR_HTTPS_POST_RECEIVED')
     return ACT3
   }
-  get_Decrypt_Data_or_HTTPS_POST_received() {
+  get_Encrypted_Data_or_HTTPS_POST_received() {
     return this._act.getActByType('ENCRYPTED_DATA_OR_HTTPS_POST_RECEIVED')
   }
   check_Extract_Encrypted_Data_Object(address) {
@@ -555,10 +554,10 @@ class TokenMain extends Contract {
   get_Extract_Encrypted_Data_ObjectByAddress(address) {
     return this.accounts.find(account => account.address === address)
   }
-  async Extract_Encrypted_Data_Object(address_Decrypt_Data_or_HTTPS_POST_received) {
+  async Extract_Encrypted_Data_Object(address_Encrypted_Data_or_HTTPS_POST_received) {
     this._user.checkUser(this.sender, 'WEB_SERVER')
-    let Check_Decrypt_Data_or_HTTPS_POST_received = this._act.getActByAddress(address_Decrypt_Data_or_HTTPS_POST_received)
-    if (!Check_Decrypt_Data_or_HTTPS_POST_received || Check_Decrypt_Data_or_HTTPS_POST_received.type !== 'ENCRYPTED_DATA_OR_HTTPS_POST_RECEIVED')
+    let Check_Encrypted_Data_or_HTTPS_POST_received = this._act.getActByAddress(address_Encrypted_Data_or_HTTPS_POST_received)
+    if (!Check_Encrypted_Data_or_HTTPS_POST_received || Check_Encrypted_Data_or_HTTPS_POST_received.type !== 'ENCRYPTED_DATA_OR_HTTPS_POST_RECEIVED')
       throw 'ENCRYPTED_DATA_OR_HTTPS_POST_RECEIVED IS NOT EXIST'
     let Extract_Encrypted_Data_Object = await this._act.createAct('EXTRACT_ENCRYPTED_DATA_OBJECT')
     return Extract_Encrypted_Data_Object
@@ -619,7 +618,7 @@ class TokenMain extends Contract {
     return ACT5
   }
   get_Sensor_data_or_Decrypt_Data() {
-    return this._act.getActByType('HAS_CONTENT')
+    return this._act.getActByType('SENSOR_DATA_OR_DECRYPT_DATA')
   }
   async Has_not_content(address_Sensor_data_or_Decrypt_Data) {
     this._user.checkUser(this.sender, 'WEB_SERVER')

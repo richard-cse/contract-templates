@@ -51,7 +51,7 @@ class TokenMain extends Contract {
   static schemas = {
     name: {
       type: String,
-      default: 'ANTI-COUNTERFEIT-02'
+      default: 'MANAGED_COMPANY'
     },
     accounts: [
       {

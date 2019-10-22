@@ -140,7 +140,7 @@ class TokenMain extends Contract {
   checkProcess(address) {
     this.check_Credit_Criteria = this.get_Credit_CriteriaByAddress(address);
     this.check_Order_Form = this.get_Order_FormByAddress(address);
-    this.Hight_Balance = this.get_Hight_BalanceByAddress(address);
+    this.check_Hight_Balance = this.get_Hight_BalanceByAddress(address);
     if (this.check_Credit_Criteria.type == 'CREDIT_CRITREIA') {
       return true;
     }
@@ -210,10 +210,10 @@ class TokenMain extends Contract {
     return this._process.getProcessByType('SALES_CALL')
   }
   // --------------------Buy_Product---------------------------
-  async Buy_Product(address_Saler_Call) {
+  async Buy_Product(address_Sales_Call) {
     this._user.checkUser(this.sender, 'CUSTOMER')
-    let check_Saler_Call = this._process.getProcessByAddress(address_Saler_Call)
-    if (!check_Saler_Call || check_Saler_Call.type !== 'SALES_CALL')
+    let check_Sales_Call = this._process.getProcessByAddress(address_Sales_Call)
+    if (!check_Sales_Call || check_Sales_Call.type !== 'SALES_CALL')
       throw 'SALES_CALL IS NOT EXIST'
     let Buy_Product = await this._process.createProcess('BUY_PRODUCT')
     return Buy_Product
@@ -319,7 +319,7 @@ class TokenMain extends Contract {
     this._user.checkUser(this.sender, 'CREDIT_DEPARTMENT')
     let check_Ok = this._process.getProcessByAddress(address_Ok)
     if (!check_Ok || check_Ok.type !== 'OK')
-      throw 'REVIEW_ACCOUNT_RECEIVABLE_BAOKLANCE IS NOT EXIST'
+      throw 'OK IS NOT EXIST'
     let Calculate_Credit_terms = await this._process.createProcess('CALCULATE_CREDIT_TERMS')
     return Calculate_Credit_terms
   }

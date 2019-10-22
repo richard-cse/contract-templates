@@ -8,8 +8,6 @@ class TokenMain extends Contract {
     'get_Tele_callers_make_verification_call_to_verifY_KYC_information_and_tally_with_KYC_documents',
     'get_Verify_on_site_imagery',
     'get_Team_Leader_does_quality_checks_and_send_images_and_reports_to_operations_manager',
-    
-
   ]
   static authenticationFuncs = [
     'Associates_tally_time_of_missed_call_with_time_of_digital_signature',
@@ -97,7 +95,6 @@ class TokenMain extends Contract {
     let tele = await this._process.createProcess('TELE_CALLERS_MAKE_VERIFICATION_CALL_TO_VERIFY_KYC_INFORMATION_AND_TALLY_WITH_KYC_DOCUMENTS')
     return tele
   }
-
   get_Tele_callers_make_verification_call_to_verifY_KYC_information_and_tally_with_KYC_documents() {
     return this._process.getProcessByType('TELE_CALLERS_MAKE_VERIFICATION_CALL_TO_VERIFY_KYC_INFORMATION_AND_TALLY_WITH_KYC_DOCUMENTS')
   }

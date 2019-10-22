@@ -305,9 +305,9 @@ class TokenMain extends Contract {
   get_Investigate_and_VerificationByAddress(address) {
     return this.accounts.find(account => account.address === address)
   }
-  async Investigate_and_Verification(address_Reconsideration) {
+  async Investigate_and_Verification(address_Apply_for_Reconsideration) {
     this._process.checkProcess(this.sender, 'P2P_LENDING')
-    let check_Apply_for_Reconsideration = this._act.getActByAddress(address_Reconsideration)
+    let check_Apply_for_Reconsideration = this._act.getActByAddress(address_Apply_for_Reconsideration)
     if (!check_Apply_for_Reconsideration || check_Apply_for_Reconsideration.type !== 'APPLY_FOR_RECONSIDERATION')
       throw 'APPLY_FOR_RECONSIDERATION IS NOT EXIST'
     let Investigate_and_Verification = await this._act.createAct('INVESTIGATE_AND_VERIFICATION')

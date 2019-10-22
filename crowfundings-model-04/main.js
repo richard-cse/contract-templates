@@ -34,7 +34,6 @@ class TokenMain extends Contract {
     'get_Expost',
     'Exante',
     'get_Exante'
-
   ]
   static schemas = {
     name: {

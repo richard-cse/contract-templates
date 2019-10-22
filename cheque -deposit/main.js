@@ -15,12 +15,14 @@ class TokenMain extends Contract {
     'get_Sender_authorise',
     'get_Money_trasferred_to_receiver',
     'get_Invalid_Transaction ',
+    'get_Check_Receiver_bank_account'
   ]
   static authenticationFuncs = [
     'Insert_bank_card_to_machine',
     'Enter_bank_account_to_machine',
     'Receiver_bank_account',
     'Cheque_inserted_to_machine',
+    'Check_Receiver_bank_account',
     'Value',
     'Sender_Account',
     '7_days',
@@ -35,6 +37,7 @@ class TokenMain extends Contract {
     'Insert_bank_card_to_machine',
     'get_Insert_bank_card_to_machine',
     'Enter_bank_account_to_machine',
+    'Check_Receiver_bank_account',
     'get_Enter_bank_account_to_machine',
     'Receiver_bank_account',
     'get_Receiver_bank_account',
@@ -141,13 +144,13 @@ class TokenMain extends Contract {
     return check
   }
   get_Check_Receiver_bank_account() {
-    return this._process.getProcessByType('DEPOSIT_PROCESS')
+    return this._process.getProcessByType('CHECK_RECEIVER_BANKS_ACCOUNT')
   }
   async Receiver_bank_account(address_Check_Receiver_bank_account) {
     this._user.checkUser(this.sender, 'USER')
     let check_Check_Receiver_bank_account = this._process.getProcessByAddress(address_Check_Receiver_bank_account)
     if (!check_Check_Receiver_bank_account || check_Check_Receiver_bank_account.type !== 'CHECK_RECEIVER_BANKS_ACCOUNT')
-      throw 'CREATECHECK_RECEIVER_BANKS_ACCOUNT_PRODUCT IS NOT EXIST'
+      throw 'CHECK_RECEIVER_BANKS_ACCOUNT IS NOT EXIST'
     let Receiver_bank_account = await this._process.createProcess('RECEIVER_BANKS_ACCOUNT')
     return Receiver_bank_account
   }

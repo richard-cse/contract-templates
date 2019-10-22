@@ -155,8 +155,8 @@ class TokenMain extends Contract {
     return this.accounts.find(account => account.address === address)
   }
   checkProcess1(address) {
-    this.checkCash_library = this.getWith_draw_processByAddress(address);
-    this.checkAccount = this.getDeposit_processByAddress(address);
+    this.checkCash_library = this.getCash_libraryByAddress(address);
+    this.checkAccount = this.getAccountByAddress(address);
     this._act.checkAct = this._act.getActByAddress(address);
     if (this.checkCash_library.type == 'CASH_LIBRARY') {
       return true;
@@ -268,7 +268,7 @@ class TokenMain extends Contract {
     return this.accounts.find(account => account.address === address)
   }
   async Deposit_book_deposit_and_with_draw_slip() {
-    await this.checkDeposit(this.sender, 'DEPOSITOR')
+    await this.checkDepositor(this.sender, 'DEPOSITOR')
     let Depositor = await this._process.createProcess('DEPOSIT_BOOK_DEPOSIT_AND_WITH_DRAW_SLIP')
     return Depositor
   }

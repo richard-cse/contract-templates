@@ -40,11 +40,11 @@ class TokenMain extends Contract {
     'BC6_Result_negative_income_tax_liability',
     'get_BC6_Result_negative_income_tax_liability',
     'BC6_Result_positive_income_tax_liability',
-    'get_BC6_Result_positive_income_tax_liability'
+    'get_BC6_Result_positive_income_tax_liability',
     'BC6_Result_negative_or_positive_income_tax_liability',
     'get_BC6_Result_negative_or_positive_income_tax_liability',
-    'BC8_Saticfaction_of_income_tax_liability'
-	'get_BC8_Saticfaction_of_income_tax_liability'
+    'BC8_Saticfaction_of_income_tax_liability',
+    'get_BC8_Saticfaction_of_income_tax_liability'
   ]
   static schemas = {
     name: {
@@ -150,18 +150,18 @@ class TokenMain extends Contract {
     let check_Taxable_income = this._tax.getTaxByAddress(address_Taxable_income)
     if (!check_Taxable_income || check_Taxable_income.type !== 'TAXABLE_INCOME')
       throw 'TAXABLE_INCOME IS NOT EXIST'
-    let Bacsic_tax_rate = await this._tax.createTax('BAXSIC_TAX_TAX')
+    let Bacsic_tax_rate = await this._tax.createTax('BACSIC_TAX_RATE')
     return Bacsic_tax_rate
   }
   get_Bacsic_tax_rate() {
-    return this._tax.getTaxByType('BAXSIC_TAX_TAX')
+    return this._tax.getTaxByType('BACSIC_TAX_RATE')
   }
   // --------------------Equals---------------------------  
   async Equals(address_Taxable_income) {
     this._process.checkProcess(this.sender, 'BC')
     let check_Bacsic_tax_rate = this._tax.getTaxByAddress(address_Taxable_income)
-    if (!check_Bacsic_tax_rate || check_Bacsic_tax_rate.type !== 'BAXSIC_TAX_TAX')
-      throw 'BAXSIC_TAX_TAX IS NOT EXIST'
+    if (!check_Bacsic_tax_rate || check_Bacsic_tax_rate.type !== 'BACSIC_TAX_RATE')
+      throw 'BACSIC_TAX_RATE IS NOT EXIST'
     let Equals = await this._tax.createTax('EQUALS')
     return Equals
   }

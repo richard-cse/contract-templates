@@ -10,7 +10,7 @@ class TokenMain extends Contract {
     'get_Forwards_details',
     'get_Authorize_Payments',
     'get_Protect_CC_details',
-    'get_Verifies_CC_deytails',
+    'get_Verifies_CC_details',
     'get_Verifies_transaction_type_and_amount',
     'get_Authorize_the_available_funds_in_the_CC_holder',
     'get_Approved',
@@ -23,7 +23,7 @@ class TokenMain extends Contract {
     'Forwards_details',
     'Authorize_Payments',
     'Protect_CC_details',
-    'Verifies_CC_deytails',
+    'Verifies_CC_details',
     'Verifies_transaction_type_and_amount',
     'Authorize_the_available_funds_in_the_CC_holder',
     'Approved',
@@ -47,8 +47,8 @@ class TokenMain extends Contract {
     'get_Authorize_Payments',
     'Protect_CC_details',
     'get_Protect_CC_details',
-    'Verifies_CC_deytails',
-    'get_Verifies_CC_deytails',
+    'Verifies_CC_details',
+    'get_Verifies_CC_details',
     'Verifies_transaction_type_and_amount',
     'get_Verifies_transaction_type_and_amount',
     'Authorize_the_available_funds_in_the_CC_holder',
@@ -153,23 +153,23 @@ class TokenMain extends Contract {
   get_Protect_CC_details() {
     return this._process.getProcessByType('PROTECT_CC_DETAILS')
   }
-  // --------------------Verifies_CC_deytails---------------- ----------- 
+  // --------------------Verifies_CC_details---------------- ----------- 
   async Verifies_CC_deytails(address_Protect_CC_details) {
     this._user.checkUser(this.sender, 'AQUIRING_BANK')
     let check_Protect_CC_details = this._process.getProcessByAddress(address_Protect_CC_details)
     if (!check_Protect_CC_details || check_Protect_CC_details.type !== 'PROTECT_CC_DETAILS')
       throw 'PROTECT_CC_DETAILS IS NOT EXIST'
-    let Verifies_CC_deytails = await this._process.createProcess('VERIFIES_CC_DETAILS')
-    return Verifies_CC_deytails
+    let Verifies_CC_details = await this._process.createProcess('VERIFIES_CC_DETAILS')
+    return Verifies_CC_details
   }
   get_Verifies_CC_deytails() {
     return this._process.getProcessByType('VERIFIES_CC_DETAILS')
   }
   // --------------------Verifies_transaction_type_and_amount---------------- ----------- 
-  async Verifies_transaction_type_and_amount(address_Verifies_CC_deytails) {
+  async Verifies_transaction_type_and_amount(address_Verifies_CC_details) {
     this._user.checkUser(this.sender, 'AQUIRING_BANK')
-    let check_Verifies_CC_deytails = this._process.getProcessByAddress(address_Verifies_CC_deytails)
-    if (!check_Verifies_CC_deytails || check_Verifies_CC_deytails.type !== 'VERIFIES_CC_DETAILS')
+    let check_Verifies_CC_details = this._process.getProcessByAddress(address_Verifies_CC_details)
+    if (!check_Verifies_CC_details || check_Verifies_CC_details.type !== 'VERIFIES_CC_DETAILS')
       throw 'VERIFIES_CC_DETAILS IS NOT EXIST'
     let Verifies_transaction_type_and_amount = await this._process.createProcess('VERIFIES_TRANSACTION_TYPE_AND_AMOUNT')
     return Verifies_transaction_type_and_amount
@@ -183,18 +183,18 @@ class TokenMain extends Contract {
     let check_Verifies_transaction = this._process.getProcessByAddress(address_Verifies_transaction_type_and_amount)
     if (!check_Verifies_transaction || check_Verifies_transaction.type !== 'VERIFIES_TRANSACTION_TYPE_AND_AMOUNT')
       throw 'VERIFIES_TRANSACTION_TYPE_AND_AMOUNT IS NOT EXIST'
-    let Authorize = await this._process.createProcess('AUTHORIZE_THE_VAILABLE_FUNDS_IN_THE_CCA_HOLDER')
+    let Authorize = await this._process.createProcess('AUTHORIZE_THE_VAILABLE_FUNDS_IN_THE_CC_HOLDER')
     return Authorize
   }
   get_Authorize_the_available_funds_in_the_CC_holder() {
-    return this._process.getProcessByType('AUTHORIZE_THE_VAILABLE_FUNDS_IN_THE_CCA_HOLDER')
+    return this._process.getProcessByType('AUTHORIZE_THE_VAILABLE_FUNDS_IN_THE_CC_HOLDER')
   }
   // --------------------Approved---------------- ----------- 
   async Approved(address_Authorize_the_available_funds_in_the_CC_holder) {
     this._user.checkUser(this.sender, 'CUSTOMER')
     let check_Authorize = this._process.getProcessByAddress(address_Authorize_the_available_funds_in_the_CC_holder)
-    if (!check_Authorize || check_Authorize.type !== 'AUTHORIZE_THE_VAILABLE_FUNDS_IN_THE_CCA_HOLDER')
-      throw 'AUTHORIZE_THE_VAILABLE_FUNDS_IN_THE_CCA_HOLDER IS NOT EXIST'
+    if (!check_Authorize || check_Authorize.type !== 'AUTHORIZE_THE_VAILABLE_FUNDS_IN_THE_CC_HOLDER')
+      throw 'AUTHORIZE_THE_VAILABLE_FUNDS_IN_THE_CC_HOLDER IS NOT EXIST'
     let Approved = await this._process.createProcess('APPROVED')
     return Approved
   }
@@ -207,18 +207,18 @@ class TokenMain extends Contract {
     let check_Approved = this._process.getProcessByAddress(address_Approved)
     if (!check_Approved || check_Approved.type !== 'APPROVED')
       throw 'APPROVED IS NOT EXIST'
-    let Sends_reponse = await this._process.createProcess('SEND_REPONSE')
+    let Sends_reponse = await this._process.createProcess('SENDS_REPONSE')
     return Sends_reponse
   }
   get_Sends_reponse() {
-    return this._process.getProcessByType('SEND_REPONSE')
+    return this._process.getProcessByType('SENDS_REPONSE')
   }
   // --------------------Forwards_reponse_code---------------- ----------- 
   async Forwards_reponse_code(address_Sends_reponse) {
     this._user.checkUser(this.sender, 'AQUIRING_BANK')
     let check_Sends_reponse = this._process.getProcessByAddress(address_Sends_reponse)
-    if (!check_Sends_reponse || check_Sends_reponse.type !== 'APPROVED')
-      throw 'APPROVED IS NOT EXIST'
+    if (!check_Sends_reponse || check_Sends_reponse.type !== 'SENDS_REPONSE')
+      throw 'SENDS_REPONSE IS NOT EXIST'
     let Forwards_reponse_code = await this._process.createProcess('FORWARDS_REPONSE_CODE')
     return Forwards_reponse_code
   }

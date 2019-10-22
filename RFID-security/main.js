@@ -18,7 +18,6 @@ class TokenMain extends Contract {
     'get_Send_an_SMS_to_consumer_about_Balance_after_Transaction_using_GSM',
     'get_GSM_send_an_SMS_to_VM_s_owner_when_3_items_are_left_in_machine',
   ]
-
   static authenticationFuncs = [
     'RFID_UID_Input',
     'Is_this_UID_stored_in_Database',
@@ -198,7 +197,6 @@ class TokenMain extends Contract {
     return this._process.getProcessByType('LCD_DISPLAYS_BALANCE_AFTER_TRANSACTION')
   }
   //---------------------Send_an_SMS_to_consumer_about_Balance_after_Transaction_using_GSM------------------------------
-
   async Send_an_SMS_to_consumer_about_Balance_after_Transaction_using_GSM() {
     let CheckLCD_displays = this._process.getProcessByAddress(this.sender)
     if (!CheckLCD_displays || CheckLCD_displays.type !== 'LCD_DISPLAYS_BALANCE_AFTER_TRANSACTION') throw 'LCD_DISPLAYS_BALANCE_AFTER_TRANSACTION IS NOT EXIST'

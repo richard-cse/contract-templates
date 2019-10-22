@@ -203,8 +203,8 @@ class TokenMain extends Contract {
     this._user.checkUser(this.sender, 'USER')
     let check_It_require_shared_write_access = this._act.getActByAddress(address_It_require_shared_write_access)
     if (!check_It_require_shared_write_access || check_It_require_shared_write_access.type !== 'IT_REQUIRE_SHARED_WRITE_ACCESS')
-      throw 'IT_REQUIRE_SHARED_WRITE IS NOT EXIST'
-    let Write_known_and_trusted = await this._act.createAct('IT_REQUIRE_SHARED_WRITE_ACCESS')
+      throw 'IT_REQUIRE_SHARED_WRITE_ACCESS IS NOT EXIST'
+    let Write_known_and_trusted = await this._act.createAct('WRITE_KNOWN_AND_TRUSTED')
     return Write_known_and_trusted
   }
   get_Write_known_and_trusted() {
@@ -250,7 +250,7 @@ class TokenMain extends Contract {
     return I_want_or_i_need_to_use_a_trusted_3rd_party
   }
   get_I_want_or_I_need_to_use_a_trusted_3rd_party() {
-    return this._act.getActByType('DO_NOT_WRITE_KNOWN_AND_TRUSTED')
+    return this._act.getActByType('I_WANT_OR_I_NEED_TO_USE_A_TRUST_3RD_PARTY')
   }
   //--------------------I_do_not_want_or_I_do_not_need_to_use_a_trusted_3rd_party------------------------------
   async  I_do_not_want_or_I_do_not_need_to_use_a_trusted_3rd_party(address_It_require_shared_write_access) {
@@ -330,22 +330,22 @@ class TokenMain extends Contract {
   }
   async  check_Do_not_need_blockchain() {
     this.checkAct2(this.sender, 'CHECK_DO_NOT_USE_BLOCKCHAIN_FOR_CHECK')
-    let check_Act2 = await this._act.createAct('CHECK_DO_NOT_USE_BLOCKCHAIN')
+    let check_Act2 = await this._act.createAct('CHECK_DO_NOT_NEED_BLOCKCHAIN')
     return check_Act2
   }
   get_check_Do_not_need_blockchain() {
-    return this._act.getActByType('CHECK_DO_NOT_USE_BLOCKCHAIN')
+    return this._act.getActByType('CHECK_DO_NOT_NEED_BLOCKCHAIN')
   }
   async  Do_not_need_blockchain(address_check_Do_not_need_blockchain) {
     this._user.checkUser(this.sender, 'USER')
     let check_check_Act = this._act.getActByAddress(address_check_Do_not_need_blockchain)
     if (!check_check_Act || check_check_Act.type !== 'ARE_WRITERS_KNOWN_AND_TRUSTED')
       throw 'ARE_WRITERS_KNOWN_AND_TRUSTED IS NOT EXIST'
-    let Do_not_need_blockchain = await this._act.createAct('DO_NOT_USE_BLOCKCHAIN')
+    let Do_not_need_blockchain = await this._act.createAct('DO_NOT_NEED_BLOCKCHAIN')
     return Do_not_need_blockchain
   }
   get_Do_not_need_blockchain() {
-    return this._act.getActByType('DO_NOT_USE_BLOCKCHAIN')
+    return this._act.getActByType('DO_NOT_NEED_BLOCKCHAIN')
   }
   //--------------------I_need_to_control_functionality------------------------------
   check_I_need_to_control_functionality(address) {
@@ -431,7 +431,7 @@ class TokenMain extends Contract {
     if (this.check_I_want_transations_tobe_private == 'I_WANT_TRANSACTIONS_TOBE_PRIVATE') {
       return true;
     }
-    else if (this.check_It_do_not_require_shared_write_access.type == 'I_NEED_TO_CONTROL_FUNCTIONALITY') {
+    else if (this.check_I_need_to_control_functionality.type == 'I_NEED_TO_CONTROL_FUNCTIONALITY') {
       return true;
     }
     else {

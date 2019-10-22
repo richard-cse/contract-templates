@@ -262,11 +262,11 @@ class TokenMain extends Contract {
     let check_Configure_Product = this._process.getProcessByAddress(address_Configure_Product)
     if (!check_Configure_Product || check_Configure_Product.type !== 'CONFIGURE_PRODUCT')
       throw 'CONFIGURE_PRODUCT IS NOT EXIST'
-    let Exception = await this._process.createProcess('EXCEPTION')
+    let Exception = await this._process.createProcess('SUBMIT_AND_ACCEPT_EXCEPTION')
     return Exception
   }
   get_Submit_and_Accept_Exception() {
-    return this._process.getProcessByType('EXCEPTION')
+    return this._process.getProcessByType('SUBMIT_AND_ACCEPT_EXCEPTION')
   }
   // --------------------Verify_Account---------------------------
   check_Verify_Account(address) {
@@ -279,9 +279,9 @@ class TokenMain extends Contract {
   }
   async Verify_Account(address_Submit_and_Accept_Exception) {
     this._user.checkUser(this.sender, 'BANK_MANAGER')
-    let check_Exception = this._process.getProcessByAddress(address_Submit_and_Accept_Exception)
-    if (!check_Exception || check_Exception.type !== 'CONFIGURE_PRODUCT')
-      throw 'CONFIGURE_PRODUCT IS NOT EXIST'
+    let check_Submit_and_Accept_Exception= this._process.getProcessByAddress(address_Submit_and_Accept_Exception)
+    if (!check_Submit_and_Accept_Exception || check_Submit_and_Accept_Exception.type !== 'SUBMIT_AND_ACCEPT_EXCEPTION')
+      throw 'SUBMIT_AND_ACCEPT_EXCEPTION IS NOT EXIST'
     let Verify_Account = await this._process.createProcess('VERIFY_ACCOUNT')
     return Verify_Account
   }
