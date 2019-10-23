@@ -192,12 +192,6 @@
     "address": "database-information"
   },
   {
-    "_id": "5bee934e2fec9f2d24c88bc232",
-    "name": "Database-Information",
-    "fieldId": "5bee92b13e1b1123ac49a445",
-    "address": "database-information"
-  },
-  {
     "_id": "5bee934e2fec9f2d24c88bc233",
     "name": "E-Commerce-03",
     "fieldId": "5bee92b13e1b1123ac49a443",
@@ -280,12 +274,6 @@
     "name": "Merchant-KYC",
     "fieldId": "5bee92573e1b1123ac49a440",
     "address": "Merchant-KYC"
-  },
-  {
-    "_id": "5bee934e2fec9f2d24c88bc2347",
-    "name": "Proof-of-Work",
-    "fieldId": "5bee92573e1b1123ac49a440",
-    "address": "proof-of-work"
   },
   {
     "_id": "5bee934e2fec9f2d24c88bc2348",
